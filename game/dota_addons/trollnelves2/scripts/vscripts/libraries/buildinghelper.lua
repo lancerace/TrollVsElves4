@@ -239,6 +239,7 @@ end
 function BuildingHelper:OnNPCSpawned(keys)
     local npc = EntIndexToHScript(keys.entindex)
     if IsBuilder(npc) then
+        DebugPrint("BuildingHelper:OnNPCSPAWNED, initialize Builder")
         BuildingHelper:InitializeBuilder(npc)
     end
     local collision_size = npc:GetCollisionSize()
@@ -1093,6 +1094,7 @@ function BuildingHelper:AddBuilding(keys)
 
     -- Prepare the builder, if it hasn't already been done
     if not builder.buildingQueue then  
+        DebugPrint("BuildingHelper:AddBuilding, initialize Builder")
         BuildingHelper:InitializeBuilder(builder)
     end
 

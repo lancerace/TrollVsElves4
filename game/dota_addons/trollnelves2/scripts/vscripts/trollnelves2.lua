@@ -182,7 +182,12 @@ end
 function OnPlayerVote(eventSourceIndex, args)
 	local playerID = args["pID"]
 	local vote = args["team"]
+	DebugPrint("playervote")
+	DebugPrint("pID",playerID)
+	DebugPrint("vote:",vote)
 	GameRules.players[playerID] = vote == "troll" and 2 or 1
+
+	DebugPrint("gamerules playerid:",GameRules.players[playerID])
 end
 
 function InitializeHero(hero)
@@ -208,6 +213,8 @@ function InitializeHero(hero)
 end
 
 function InitializeBuilder(hero)
+	DebugPrint("trollnelves2.lua InitializeBuilder")
+	DebugPrint(hero)
 	InitializeHero(hero)
 	local pID = hero:GetPlayerOwnerID()
 	hero.alive = true
@@ -226,7 +233,7 @@ function InitializeBuilder(hero)
 	hero:AddItem(glyph)
 	hero:AddItem(night)
 	hero:AddItem(blink)
-
+	DebugPrint("trollnelves2.lua InitializeBuilder, add Items")
 	hero.goldPerSecond = 0
 	hero.lumberPerSecond = 0
 	Timers:CreateTimer(0.03, function() 
@@ -248,7 +255,7 @@ function InitializeBuilder(hero)
 	PlayerResource:SetGold(hero,30)
 	PlayerResource:SetLumber(hero,0) -- Secondary resource of the player
 	PlayerResource:ModifyFood(hero,0)
-
+	DebugPrint("trollnelves2.lua InitializeBuilder,end")
 	hero:NotifyWearablesOfModelChange(false)
 end
 
@@ -338,7 +345,7 @@ function InitializeTroll(hero)
 			end
 		end, 
 	pID)
-
+	DebugPrint("trollnelves2.lua InitializeTroll,end")
 end
 
 
@@ -367,13 +374,15 @@ function trollnelves2:OnHeroInGame(hero)
 	if PlayerResource:IsElf(hero) then
 		--Builder team!
 		if team == DOTA_TEAM_GOODGUYS then
+			DebugPrint("if team == DOTA_TEAM_GOODGUYS, initialize builder")
 			InitializeBuilder(hero)
 		--Troll team!
 		elseif team == DOTA_TEAM_BADGUYS then
+			DebugPrint("if team == DOTA_TEAM_BADGUYS ,initializeTroll")
 			InitializeTroll(hero)
 		end
 	end
-
+	DebugPrint("OnHeroInGame")
 end
 
 function trollnelves2:PreStart()

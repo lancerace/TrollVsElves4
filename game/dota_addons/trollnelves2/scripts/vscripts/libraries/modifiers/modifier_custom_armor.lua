@@ -30,7 +30,7 @@ if IsServer() then
       return 0
     else
       self.checkArmor = true
-      local armor = self:GetParent():GetPhysicalArmorValue()
+      local armor = self:GetParent():GetPhysicalArmorValue(false)
       self.checkArmor = false
       return armor * -1; -- Return negative armor, so dota 2 thinks the armor is 0 and gives 0 physical resistance
     end

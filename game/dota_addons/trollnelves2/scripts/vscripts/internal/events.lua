@@ -34,6 +34,7 @@ function trollnelves2:_OnNPCSpawned(keys)
     npc.bFirstSpawned = true
     trollnelves2:OnHeroInGame(npc)
   end
+  DebugPrint("trollnelves2:_OnNPCSpawned ,end")
 end
 
 -- An entity died
